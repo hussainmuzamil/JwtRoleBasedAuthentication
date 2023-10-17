@@ -8,6 +8,7 @@ import com.example.task1.config.JWTService;
 import com.example.task1.repository.RoleRepository;
 import com.example.task1.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,7 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 
     private final PasswordEncoder passwordEncoder;
     @Override
-    public JwtAuthenticationResponse signIn(AuthRequest authRequest) {
+    public ResponseEntity<JwtAuthenticationResponse> signIn(AuthRequest authRequest) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getEmail(),authRequest.getPassword()));
         var user = repository.findUserByEmail(authRequest.getEmail()).orElseThrow(()->new UsernameNotFoundException("username doesn't exist"));
         var jwt = jwtService.generateToken(user.getEmail());
@@ -38,10 +39,10 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         JwtAuthenticationResponse authenticationResponse = new JwtAuthenticationResponse();
         authenticationResponse.setToken(jwt);
         authenticationResponse.setRefreshToken(refreshToken);
-        return authenticationResponse;
+        return ResponseEntity.ok(authenticationResponse);
     }
     @Override
-    public String signUp(User user) {
+    public ResponseEntity<String> signUp(User user) {
             User u1 = new User();
             u1.setName(user.getName());
             Role userRl = roleRepository.findByName("USER");
@@ -49,6 +50,6 @@ public class AuthenticationServiceImpl implements AuthenticationService{
             u1.setEmail(user.getEmail());
             u1.setPassword(passwordEncoder.encode(user.getPassword()));
             repository.save(u1);
-            return "User save successfully";
+            return ResponseEntity.ok("User save successfully");
     }
 }

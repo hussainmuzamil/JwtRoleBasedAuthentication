@@ -18,30 +18,10 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     private final UserRepository userRepository;
-//    private final JWTService jwtService;
-//    private final AuthenticationManager authenticationManager;
-//
-//    private final AuthenticationService authenticationService;
-
-//    public UserController(
-//            @Autowired UserRepository userRepository,
-//            @Autowired JWTService jwtService,
-//            @Autowired AuthenticationManager authenticationManager,
-//            @Autowired AuthenticationService authenticationService){
-//        this.userRepository = userRepository;
-//        this.jwtService = jwtService;
-//        this.authenticationManager = authenticationManager;
-//        this.authenticationService = authenticationService;
-//    }
-
     @GetMapping("/")
     public ResponseEntity<List<User>> getUser(){
         return ResponseEntity.ok(this.userRepository.findAll());
     }
 
-//    @PostMapping("/authenticate")
-//    public String authenticateAndGenerateToken(@RequestBody AuthRequest authRequest){
-//        var authRes =  authenticationService.signIn(authRequest);
-//        return "SignIn successful";
-//    }
+
 }

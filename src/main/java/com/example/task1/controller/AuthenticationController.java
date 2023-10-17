@@ -4,6 +4,7 @@ import com.example.task1.entity.User;
 import com.example.task1.model.AuthRequest;
 import com.example.task1.service.AuthenticationService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,7 +20,7 @@ public class AuthenticationController {
 
     }
     @PostMapping("/signUp")
-    public String signUp(@RequestBody User user){
+    public ResponseEntity<String> signUp(@RequestBody User user){
         return authenticationService.signUp(user);
     }
 }

@@ -28,7 +28,6 @@ public class UserDetailsService implements org.springframework.security.core.use
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findUserByEmail(email).orElseThrow(()->new UsernameNotFoundException("Username doesn't exists"));
         return new org.springframework.security.core.userdetails.User(user.getName(),user.getPassword(),mapAuthoritiesToRole(user.getRoles()));
-
     }
     public Collection<? extends GrantedAuthority> mapAuthoritiesToRole(List<Role> roleSet){
         return roleSet.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
