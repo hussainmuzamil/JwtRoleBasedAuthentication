@@ -26,17 +26,8 @@ public class SecurityConfig {
 
 //<<<<<<< HEAD
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
-//=======
-////    private final JWTHelper jwtHelper;
-//    public SecurityConfig(
-//            @Autowired JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint
-////            @Autowired JWTHelper jwtHelper
-//    ){
-//        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
-////        this.jwtHelper = jwtHelper;
-//    }
 
-
+    JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     private final UserDetailsService userDetailsService;
     @Bean
@@ -44,10 +35,10 @@ public class SecurityConfig {
 
         http.csrf(csrf -> csrf.disable())
                 .authorizeRequests().
-                requestMatchers("/").authenticated().requestMatchers("/authenticate").permitAll()
+                requestMatchers("/").authenticated().requestMatchers("/authenticate/signUp").permitAll()
                 .anyRequest()
                 .authenticated()
-                .and()
+                .and().exceptionHandling(ex->ex.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.authenticationProvider(authenticationProvider()).addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

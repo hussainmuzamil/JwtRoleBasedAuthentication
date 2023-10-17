@@ -4,6 +4,7 @@ import com.example.task1.service.UserDetailsService;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +32,7 @@ public class User implements UserDetails {
             ,joinColumns = @JoinColumn(name = "user_id")
             ,inverseJoinColumns = @JoinColumn(name = "role_id")
     )
+//    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Role> roles;
 
     @Override
