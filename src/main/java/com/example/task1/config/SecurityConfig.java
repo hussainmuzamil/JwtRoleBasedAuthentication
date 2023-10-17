@@ -24,7 +24,19 @@ import java.net.http.HttpRequest;
 @AllArgsConstructor
 public class SecurityConfig {
 
+//<<<<<<< HEAD
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
+//=======
+////    private final JWTHelper jwtHelper;
+//    public SecurityConfig(
+//            @Autowired JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint
+////            @Autowired JWTHelper jwtHelper
+//    ){
+//        this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
+////        this.jwtHelper = jwtHelper;
+//    }
+
+
 
     private final UserDetailsService userDetailsService;
     @Bean
