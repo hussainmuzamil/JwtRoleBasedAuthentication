@@ -7,6 +7,7 @@ import com.example.task1.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,12 +20,16 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
+    private  final PasswordEncoder encoder;
+
     public SetupDataLoader(
             @Autowired  UserRepository userRepository
-            ,@Autowired RoleRepository roleRepository
+            ,@Autowired RoleRepository roleRepository,
+            @Autowired PasswordEncoder encoder
     ){
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.encoder = encoder;
     }
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -39,14 +44,14 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             user.setName("Muzammil");
             user.setEmail("abc123@gmail.com");
             user.setRoles(Arrays.asList(adminRl));
-            user.setPassword("abc123");
+            user.setPassword(encoder.encode("abc123"));
             userRepository.save(user);
 
             Role userRl = roleRepository.findByName("USER");
             User user2 = new User();
             user2.setName("Muzammil2");
             user2.setEmail("abc234@gmail.com");
-            user2.setPassword("abc234");
+            user2.setPassword(encoder.encode("abc123"));
             user2.setRoles(Arrays.asList(userRl));
             userRepository.save(user2);
             isSetup = true;
