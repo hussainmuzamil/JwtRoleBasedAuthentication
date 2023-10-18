@@ -28,8 +28,9 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
         final String jwt;
         final String userEmail;
-        if(StringUtils.isEmpty(header) || StringUtils.startsWith(header,"Bearer")){
+        if(StringUtils.isEmpty(header) || !StringUtils.startsWith(header,"Bearer")){
             filterChain.doFilter(request,response);
+            logger.info("header doesn't contain bearer token");
             return;
         }
         jwt = header.substring(7);
@@ -46,6 +47,8 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
                 );
                 context.setAuthentication(token);
                 SecurityContextHolder.setContext(context);
+            }else{
+                logger.info("Validation Fails");
             }
         }
         filterChain.doFilter(request,response);
