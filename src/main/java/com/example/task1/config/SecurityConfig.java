@@ -36,6 +36,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeRequests().
                 requestMatchers("/users").authenticated().requestMatchers("/authenticate/signIn").permitAll()
+                .requestMatchers("/upload-file").permitAll()
                 .requestMatchers("/authenticate/signUp").permitAll()
                 .anyRequest()
                 .authenticated()
