@@ -2,6 +2,8 @@ package com.example.task1.controller;
 
 import com.example.task1.helper.FileUploadHelper;
 import lombok.AllArgsConstructor;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +21,7 @@ public class FileUploadController {
         if(file.isEmpty()){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Request must contain a file");
         }
-        if(!file.getContentType().equals("csv")){
+        if(!file.getContentType().equals("text/csv")){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File type is not supported");
         }
         try {

@@ -12,21 +12,14 @@ import java.nio.file.StandardCopyOption;
 
 @Component
 public class FileUploadHelper {
-    private final String _upload_dir = "C:\\Users\\muham\\IdeaProjects\\Task1\\src\\main\\resources\\CSVData";
+    private final String _upload_dir = "/Users/muzamil/Desktop/Java web/JwtRoleBasedAuthentication/src/main/resources/CSVData";
 
     public boolean uploadFile(MultipartFile multipartFile){
         boolean flag = false;
 
         try {
-//            InputStream inputStream = multipartFile.getInputStream();
-//            byte[] fileData = new byte[inputStream.available()];
-//            FileOutputStream fileOutputStream = new FileOutputStream(_upload_dir+ File.separator+multipartFile.getOriginalFilename());
-//            fileOutputStream.write(fileData);
-//            fileOutputStream.flush();
-//            fileOutputStream.close();
-//            flag = true;\
-//            Files.copy()
             Files.copy(multipartFile.getInputStream(), Paths.get(_upload_dir+File.separator+multipartFile.getOriginalFilename()), StandardCopyOption.REPLACE_EXISTING);
+            flag = true;
         }catch (Exception e){
             e.printStackTrace();
         }
