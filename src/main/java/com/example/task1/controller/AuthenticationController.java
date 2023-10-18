@@ -2,6 +2,7 @@ package com.example.task1.controller;
 
 import com.example.task1.entity.User;
 import com.example.task1.model.AuthRequest;
+import com.example.task1.model.JwtAuthenticationResponse;
 import com.example.task1.service.AuthenticationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,10 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
     @PostMapping("/signIn")
-    public String signIn(@RequestBody AuthRequest authRequest){
+    public ResponseEntity<JwtAuthenticationResponse> signIn(@RequestBody AuthRequest authRequest){
         var authRes =  authenticationService.signIn(authRequest);
-        return "Sign in successfully";
+//        return "Sign in successfully";
+        return authRes;
 
     }
     @PostMapping("/signUp")

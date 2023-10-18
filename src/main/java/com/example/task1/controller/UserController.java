@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     private final UserRepository userRepository;
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<User>> getUser(){
         return ResponseEntity.ok(this.userRepository.findAll());
     }
