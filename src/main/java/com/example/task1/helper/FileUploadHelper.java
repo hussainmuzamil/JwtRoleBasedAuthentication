@@ -12,7 +12,11 @@ import java.nio.file.StandardCopyOption;
 
 @Component
 public class FileUploadHelper {
+<<<<<<< HEAD
     private final String _upload_dir = "C:\\Users\\muham\\IdeaProjects\\Task1\\src\\main\\resources\\CSVData";
+=======
+    private final String _upload_dir = "/Users/muzamil/Desktop/Java web/JwtRoleBasedAuthentication/src/main/resources/CSVData";
+>>>>>>> 8d9d15d4dfa3119c9bc50c2519de168900b042b9
 
     public boolean uploadFile(MultipartFile multipartFile){
         boolean flag = false;
