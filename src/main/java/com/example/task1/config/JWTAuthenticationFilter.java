@@ -30,7 +30,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter {
         final String userEmail;
         if(StringUtils.isEmpty(header) || !StringUtils.startsWith(header,"Bearer")){
             filterChain.doFilter(request,response);
-            logger.info("header doesn't contain bearer token");
+//            logger.info("header doesn't contain bearer token");
             return;
         }
         jwt = header.substring(7);

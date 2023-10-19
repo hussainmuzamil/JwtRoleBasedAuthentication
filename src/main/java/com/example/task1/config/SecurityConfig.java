@@ -24,7 +24,6 @@ import java.net.http.HttpRequest;
 @AllArgsConstructor
 public class SecurityConfig {
 
-//<<<<<<< HEAD
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
 
     JWTAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -34,9 +33,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(csrf -> csrf.disable())
-                .authorizeRequests().
-                requestMatchers("/users").authenticated().requestMatchers("/authenticate/signIn").permitAll()
-                .requestMatchers("/upload-file").permitAll()
+                .authorizeRequests()
+                .requestMatchers("/authenticate/signIn").permitAll()
                 .requestMatchers("/authenticate/signUp").permitAll()
                 .anyRequest()
                 .authenticated()

@@ -4,7 +4,7 @@ spring:
     #configuiring multipart file upload
     multipart:
       enabled: true
-      max-file-size: 200
+      max-file-size: 40960
       file-size-threshold: 4
     #configuiring database
   datasource:
@@ -16,3 +16,10 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+    open-in-view: false
+  #spring batch configuration
+  batch:
+    job:
+      enabled: true
+    jdbc:
+      initialize-schema: always
